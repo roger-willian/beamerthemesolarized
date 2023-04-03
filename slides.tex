@@ -1,0 +1,748 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usetheme{solarized}
+\usepackage{tabularx}
+\usepackage[alf]{abntex2cite}
+
+\title{Título da Apresentação}
+\subtitle{Subtítulo}
+\date{2023}
+\author[Fulano]{Fulano de Tal}
+
+% onde estão os códigos que aparecem nos slides
+\lstset{inputpath=code}
+
+\begin{document}
+
+\maketitle
+
+% Slide com o sumário
+{
+\def\insertframenumber{\emph{idx}}
+\begin{frame}[t]\frametitle{\inserttitle}\framesubtitle{\insertsubtitle}
+  % Use isso se tiver poucos tópicos
+  % \tableofcontents[hidesubsections]
+
+  % Ou use algo assim, se tiver muitos
+  \begin{columns}[T]
+    \begin{column}{.5\textwidth}
+     \tableofcontents[hidesubsections,sections={1-4}]
+    \end{column}
+    \begin{column}{.5\textwidth}
+      \tableofcontents[hidesubsections,sections={5-8}]
+    \end{column}
+  \end{columns}
+  \addtocounter{framenumber}{-1}
+\end{frame}
+}
+
+\section{Introdução}
+
+\begin{frame}[c]\frametitle{\secname}\centering
+  Esses são slides de exemplo de como usar o tema \inline*{beamerthemesolarized}.
+  Esse tema é utiliza o modelo de cores Solarized disponível no seu próprio repositório do Github: \href{https://github.com/altercation/solarized}{altercation/solarized}.
+
+  Os planos de fundo foram criados por mim no \href{https://inkscape.org/}{Inkscape} e exportados para PDF.
+  Os slides devem ter proporção 16x9.
+  Esse é um slide simples com um título, centralizado vertical e horizontalmente.
+\end{frame}
+
+\subsection{Títulos, subtítulos e alinhamento}
+
+\begin{frame}[t,fragile]\frametitle{\secname}\framesubtitle{\subsecname}
+  Para colocar título no slide, use \inline*{\textbackslash{}frametitle\{título\}}, para adicionar também um subtítulo, use \inline*{\textbackslash{}framesubtitle\{subtítulo\}}.
+
+  Para alinhar o texto no topo, no centro ou em baixo use \inline*{[t]}, \inline*{[c]} ou \inline*{[b]}.
+
+  Para centralizar o texto use \inline*{\textbackslash{}centering} e para alinhar à direita use \inline*{\textbackslash{}raggedleft} que quer dizer que ele vai ficar picotado à esquerda.
+  O padrão é alinhar à esquerda e ficar picotado à direita.
+
+  Esse slide foi criado com um código mais ou menos assim:
+  \begin{snippet}[style=text,literate={\#}{{}}{0}]
+\begin{frame}[t]%
+\frametitle{\secname}\framesubtitle{\subsecname}
+  Para ...
+\#end{frame}
+  \end{snippet}
+\end{frame}
+
+\section{Seções}
+
+\subsection{Também subseções e subsubseções}
+\begin{frame}[t]\frametitle{\secname}\framesubtitle{\subsecname}
+  Para iniciar uma nova seção dos slides use o comando \inline*{\textbackslash{}section\{seção\}}.
+  Esse comando criará um slide de título de seção como o slide anterior a esse.
+  Para criar uma subseção utilize o comando \inline*{\textbackslash{}subsection\{seção\}}.
+  Os nomes da seção e subseção atuais ficam disponíveis, respectivamente, nas macros \inline*{\textbackslash{}secname} e \inline*{\textbackslash{}subsecname}, podendo serem usados para colocar título e subtítulo nos slides.
+
+  \subsubsection{Subsubseções}
+
+  Há ainda um terceiro nível de seção que pode ser criado com o comando \inline*{\textbackslash{}subsubsection\{Subsubseção\}}. Esse comando cria um divisão dentro do próprio slide.
+\end{frame}
+
+\section{Estilos Escolhidos}
+
+\subsection{Fonte e fundo}
+
+\begin{frame}[t]\frametitle{\secname}\framesubtitle{\subsecname}
+  A fonte tipográfica escolhida para esse modelo foi a Fira Sans.
+  Além disso, os ``fundos'' dos slides foram criados em SVG no software Inkscape usando as cores do tema Solarized e posteriormente convertidos para PDF.
+
+  Esses fundos são apenas o rodapé dos slides.
+  Na verdade o fundo está posicionado \textbf{sobre} o restante do conteúdo.
+  Isso para evitar cobrir cobrir os detalhes do fundo. Além disso,
+  interromper o conteúdo dos slides na altura do topo da imagem do fundo reduziria muito a quantidade de conteúdo que poderia ser apresentada nos slides.
+  Por isso, optou-se por permitir que o conteúdo flua por trás da imagem de ``fundo''.
+  
+  Isso fica bem aparente quando usamos caixas coloridas, imagens ou tabelas que descem até embaixo, como essa aqui:
+
+  \color{red}\rule{\textwidth}{0.5cm}
+\end{frame}
+
+\subsection{Slides de título e seção}
+
+\begin{frame}[t]\frametitle{\secname}\framesubtitle{\subsecname}
+  Os slides de título e de seção também seguem um modelo semelhante.
+  Nesse caso, os detalhes à direita do rodapé do slide são maiores e um pouco diferentes.
+
+  Nos slides de título e de seção há ainda o título e subtítulo da apresentação centralizados na parte de cima.
+\end{frame}
+
+\subsection{Cores}
+
+\setbeamercolor{white}{bg=white}
+\begin{frame}[t]\frametitle{\secname}\framesubtitle{\subsecname}
+  As seguintes cores estão disponíveis com seus próprios nomes.
+  As cores da linha de cima são recomendadas para fundo e para conteúdo padrão, as da linha de baixo para realce.\\[1em]
+  \begin{beamercolorbox}[center]{white}
+    ~\\[1em]\scriptsize
+  \begin{tabular}{cccccccc}
+    \color{base03}\rule{1.2cm}{1.2cm} & \color{base02}\rule{1.2cm}{1.2cm} & \color{base01}\rule{1.2cm}{1.2cm} & \color{base00}\rule{1.2cm}{1.2cm} & \color{base0}\rule{1.2cm}{1.2cm}  & \color{base1}\rule{1.2cm}{1.2cm}  &\color{base2}\rule{1.2cm}{1.2cm}  & \color{base3}\rule{1.2cm}{1.2cm} \\
+    base03 & base02 & base01 & base00 & base0 & base1 & base2 & base3 \\[1em]
+    \color{yellow}\rule{1.2cm}{1.2cm} & \color{orange}\rule{1.2cm}{1.2cm} & \color{red}\rule{1.2cm}{1.2cm} & \color{magenta}\rule{1.2cm}{1.2cm} & \color{violet}\rule{1.2cm}{1.2cm}  & \color{blue}\rule{1.2cm}{1.2cm}  &\color{cyan}\rule{1.2cm}{1.2cm}  & \color{green}\rule{1.2cm}{1.2cm} \\
+    yellow & orange & red & magenta & violet & blue & cyan & green \\[1em]
+  \end{tabular}
+  \end{beamercolorbox}
+\end{frame}
+
+\section{Texto}
+
+\subsection{Ênfase}
+
+\begin{frame}[t,fragile]\frametitle{\secname}\framesubtitle{\subsecname}
+  Para dar ênfase, o texto pode ser escrito em \textbf{negrito}, \emph{itálico}, ou em \alert{vermelho}, como o usual.
+
+  As cores de realce de texto estão disponíveis como comandos em português:
+  \amarelo{amarelo} \laranja{laranja} \vermelho{vermelho} \magenta{magenta} \violeta{violeta} \azul{azul} \ciano{ciano} \verde{verde}.
+
+  Outras opções de ênfase também são alcançáveis através de combinações de comandos simples.
+  O texto pode ser escrito em \cianito{``cianito''}, por exemplo, porque esse comando já foi definido como:
+\begin{snippet}[style=text]
+\newcommand{\cianito}[1]{%
+  \ciano{\textbf{#1}}%
+}
+\end{snippet}
+
+\end{frame}
+
+\subsection{Colunas}
+\begin{frame}[t]\frametitle{\secname}\framesubtitle{\subsecname}
+  \begin{columns}[T]
+    \begin{column}{.5\textwidth}
+      \subsubsection{Coluna da esquerda}
+
+      O texto também pode ser quebrado em colunas.
+      O ideal seria evitar quebrar em muitas colunas.
+    \end{column}
+    \begin{column}{.5\textwidth}
+      \subsubsection{Coluna da direita}
+
+      Para blocos de texto, duas colunas é o suficiente.
+      Passar disso fará com que as colunas fiquem estreitas.
+    \end{column}
+  \end{columns}
+  \subsubsection{Para listas podemos usar mais}
+  \begin{columns}[T]
+    \begin{column}{.25\textwidth}
+      \begin{itemize}
+        \item Item A
+        \item Item B
+        \item Item C
+      \end{itemize}
+    \end{column}
+    \begin{column}{.25\textwidth}
+      \begin{itemize}
+        \item Item D
+        \item Item E
+        \item Item F
+      \end{itemize}
+    \end{column}
+    \begin{column}{.25\textwidth}
+      \begin{itemize}
+        \item Item G
+        \item Item H
+        \item Item I
+      \end{itemize}
+    \end{column}
+    \begin{column}{.25\textwidth}
+      \begin{itemize}
+        \item Item J
+        \item Item K
+        \item Item L
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\subsection{Citações longas}
+\begin{frame}[t]\frametitle{\secname}\framesubtitle{\subsecname}
+  Citações longas podem usar o ambiente \inline*{quotation} que vai formatar e colocar aspas tipográficas na volta para efeito estético:
+
+  \begin{quotation}
+    Pra falar bem francamente: enquanto não havia máquinas, programar não era nenhum problema.
+  \end{quotation}
+  --- Edsger Dijkstra\raggedleft
+\end{frame}
+
+\subsection{Blocos}
+
+\begin{frame}[t]\frametitle{\secname}\framesubtitle{\subsecname}
+  \begin{block}{Título do bloco}
+    Texto do bloco.
+  \end{block}
+  \begin{exampleblock}{Título do exemplo}
+    Texto do exemplo.
+  \end{exampleblock}
+  \begin{alertblock}{Título do alerta}
+    Texto do alerta.
+  \end{alertblock}
+  {
+    \setbeamercolor{block title}{bg=yellow}
+    \setbeamercolor{block body}{fg=yellow}
+    \begin{block}{Personalizado}
+      Exemplo de bloco com cor personalizada.
+    \end{block}
+  }
+\end{frame}
+
+\subsection{Tabelas}
+
+\begin{frame}[t]\frametitle{\secname}\framesubtitle{\subsecname}
+  Tabelas podem ser inseridas em qualquer slide.
+  Essa é uma tabela bem completa com legenda e link para a fonte dos dados:
+  \begin{table}
+    \caption{\label{tab:pib}PIB dos estados da região sul}
+    \begin{tabular}{l r r r r}
+      \toprule
+      \cianito{UF} & \multicolumn{1}{c}{\cianito{PIB}} & \cianito{\% NACIONAL} & \cianito{\% REGIONAL} & \cianito{PER CAPTA}\\
+      \midrule
+      PR & 136 681 933 mil & 6,4 & 34,2 & 13 158,00 \\
+      SC & 93 193 324 mil & 4,0 & 21,5 & 15 638,00 \\
+      RS & 156 883 171 mil & 8,2 & 44,3 & 14 310,00 \\
+      \bottomrule
+    \end{tabular}\\[1ex]
+    \makebox[12cm][r]{\small Valores em reais. FONTE: \href{https://pt.wikipedia.org/wiki/Regi\%C3\%A3o_Sul_do_Brasil}{Wikipedia}.}
+  \end{table}
+\end{frame}
+
+\begin{frame}[t]\frametitle{\secname}\framesubtitle{\subsecname}
+  A mesma tabela poderia ser apresentada de maneira mais ``limpa'', facilitando que a audiência foque sua atenção nos dados:\footnote[frame]{PIB dos estados da região sul. Valores em reais. FONTE: \href{https://pt.wikipedia.org/wiki/Regi\%C3\%A3o_Sul_do_Brasil}{Wikipedia}}
+  \begin{table}
+    \begin{tabular}{l r r r r}
+      \toprule
+      \cianito{UF} & \multicolumn{1}{c}{\cianito{PIB}} & \cianito{\% NACIONAL} & \cianito{\% REGIONAL} & \cianito{PER CAPTA}\\
+      \midrule
+      PR & 136 681 933 mil & 6,4 & 34,2 & 13 158,00 \\
+      SC & 93 193 324 mil & 4,0 & 21,5 & 15 638,00 \\
+      RS & 156 883 171 mil & 8,2 & 44,3 & 14 310,00 \\
+      \bottomrule
+    \end{tabular}
+  \end{table}
+\end{frame}
+
+\section{Imagens}
+
+\begin{frame}[t]\frametitle{\secname}
+  Vários tipos de imagens são suportados.
+  Os seguintes são recomendados:
+  \def\arraystretch{1.5}
+  \begin{table}
+    \begin{tabular}{l c}
+      \toprule
+      \cianito{CONTEÚDO} & \cianito{TIPOS RECOMENDADOS}\\
+      \midrule
+      Linhas, diagramas, gráficos, texto, etc. & PDF ou EPS\\
+      Figuras com cores sólidas, capturas de telas, etc. & PNG ou TIFF\\
+      Fotografias, imagens com muitos detalhes, etc. & JPG\\
+      \bottomrule
+    \end{tabular}
+  \end{table}
+\end{frame}
+
+\subsection{Legenda ao lado}
+
+\begin{frame}[t]\frametitle{\secname}\framesubtitle{\subsecname}
+  \begin{columns}[T]
+    \begin{column}{9.75cm}
+      \includegraphics[width=\columnwidth]{images/pdf/complexidade.pdf}%
+    \end{column}
+    \begin{column}{4.25cm}
+      \it\cianito{complexidade temporal}\\
+      imagem gerada com o \href{http://www.gnuplot.info/}{Gnuplot}, terminal cairolatex.
+      Essa é uma imagem na proporção 6x4, com 9,75x6,50cm. Colocar a legenda ao lado permite uma legenda maior.
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}[t]\frametitle{\secname}\framesubtitle{\subsecname}
+  \begin{columns}[T]
+    \begin{column}{9.75cm}
+      \includegraphics[width=\columnwidth]{images/pdf/switch.pdf}%
+      \par\vspace*{-1.8\baselineskip}\hfill{}\colorbox{base2}{\footnotesize\color{base02}Créditos: \href{https://github.com/roger-willian}{Autor}}
+    \end{column}
+    \begin{column}{4.25cm}
+      \it\cianito{switch}\\
+      imagem SVG (\firalining 75 KB) gerada com o \href{https://inkscape.org/}{Inkscape} e exportada para PDF (\firalining 335 KB).
+      É possível utilizar \LaTeX{} dentro do SVG para formatar equações, se for necessário.
+      O PDF mantém o formato vetorial, amplie e observe as letras.
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\subsection{Vetorial vs. bitmap}
+
+\begin{frame}[t]\frametitle{\secname}\framesubtitle{\subsecname}
+  \begin{columns}[T]
+    \begin{column}{9.75cm}
+      \includegraphics[width=\columnwidth]{images/bitmap/switch.png}%
+      \par\vspace*{-1.8\baselineskip}\hfill{}\colorbox{base2}{\footnotesize\color{base02}Créditos: \href{https://github.com/roger-willian}{Autor}}
+    \end{column}
+    \begin{column}{4.25cm}
+      \it\cianito{switch}\\
+      mesma imagem exportada para o formato PNG (\firalining 277 KB).
+      Esse \textbf{não} é um formato vetorial, amplie e observe como agora as letras ficaram pixeladas.
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\subsection{Legenda abaixo}
+
+\begin{frame}[t]\frametitle{\secname}\framesubtitle{\subsecname}
+  \begin{columns}[T]
+    \begin{column}{\textwidth}
+      \includegraphics[width=\columnwidth]{images/pdf/etapas.pdf}%
+      \\\small
+      \it\cianito{processo} --- 7x3 (14x6cm), gerada com \href{https://app.diagrams.net/}{diagrams.net}.
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\section{Código Fonte}
+
+\subsection{Inline}
+
+\lstset{language=C}
+\begin{frame}[t]\frametitle{\secname}\framesubtitle{\subsecname}
+  Para colocar um pequeno pedaço de código com fonte monoespaçada e realce de cores no meio de uma linha de texto normal, use o comando \inline*{\textbackslash{}inline\{\}}.
+  Por exemplo:
+
+  ``A função \inline{printf()} da biblioteca padrão da linguagem C serve para imprimir uma string formatada na tela.''
+
+  Já para colocar um texto com fonte monoespaçada, mas sem realce de cores, use o comando \inline*{\textbackslash{}inline*\{\}} com asterisco. Por exemplo:
+
+  ``O arquivo de cabeçalho \inline*{stdio.h} contém as declarações das funções de entrada e saída.''
+\end{frame}
+
+\subsection{Tabelas}
+
+\begin{frame}[t]\frametitle{\secname}\framesubtitle{\subsecname}
+  Para colocar fonte monoespaçada em uma coluna de uma tabela, são fornecidas duas colunas especiais \inline*{I} e \inline*{i} que usam os comandos \inline*{\textbackslash{}inline\{\}} e \inline*{\textbackslash{}inline*\{\}} automaticamente:
+
+  ~
+  \def\arraystretch{1.5}
+  \centering
+  \begin{tabular}{I i l}
+    \toprule
+    \multicolumn{1}{l}{\cianito{Função}} & \multicolumn{1}{l}{\cianito{Biblioteca}} & \cianito{Descrição} \\
+    \midrule
+    printf() & <stdio.h> & Imprime string formatada \\
+    getchar() & <stdio.h> & Lê um caractere do teclado \\
+    memcpy() & <string.h> & Copia bloco de memória \\
+    malloc() & <stdlib.h> & Aloca bloco de memória \\
+    \bottomrule
+  \end{tabular}
+\end{frame}
+
+\subsection{Snippet}
+
+\begin{frame}[t,fragile]\frametitle{\secname}\framesubtitle{\subsecname}
+  Para colocar um trecho maior de código, ocupando uma ou mais linhas, use o ambiente \inline*{snippet}. 
+  No entanto, é preciso passar a opção \inline*{fragile} para o \inline*{frame}. Por exemplo:
+
+  \begin{snippet}
+int fatorial(int n) {
+  if (n < 0) return -1;
+
+  int fat_n = 1;
+  for(int i = 1; i <= n; i++) {
+    fat_n *= i;
+  }
+  return fat_n;
+}
+  \end{snippet}
+\end{frame}
+
+\begin{frame}[t,fragile]\frametitle{\secname}\framesubtitle{\subsecname}
+  Tanto o comando \inline*{\textbackslash{}inline\{\}} quanto o ambiente snippet usam o pacote \inline*{listings}\footnote[frame]{Documentação na \href{http://mirrors.ctan.org/macros/latex/contrib/listings/listings.pdf}{CTAN}} para criar o realce de sintaxe.
+  Porém o ambiente \inline*{snippet} aceita um parâmetro opcional que são as opções para o ambiente \inline*{lstlistings}.
+  Por exemplo, o trecho a seguir usa uma fonte gigante:
+
+\begin{snippet}[basicstyle=\Huge\ttfamily\color{codefg}]
+int maior(int x, int y) {
+  return x > y ? x : y;
+}
+\end{snippet}
+\end{frame}
+
+\begin{frame}[t,fragile]\frametitle{\secname}\framesubtitle{\subsecname}
+  Usando essas opções também é possível mostrar um trecho de texto em fonte monoespaçada sem realce de cores:
+\begin{snippet}[style=text]
+LISTA DO MERCADO
+Arroz       5 kg
+Feijão      2 kg
+Leite       6 cx
+Pão         1 pct
+\end{snippet}
+\end{frame}
+
+\subsection{Falso editor}
+
+\begin{frame}[t]\frametitle{\secname}\framesubtitle{\subsecname}
+  Para inserir um arquivo como se fosse dentro de um editor, use o comando \inline*{\textbackslash{}arquivo\{\}} que usa os pacotes \inline*{listings} para o realce e \inline*{tcolorbox} para criar a ilusão da janela.\footnote[frame]{Documentação na \href{http://mirrors.ctan.org/macros/latex/contrib/tcolorbox/tcolorbox.pdf}{CTAN}} Por exemplo:
+  \arquivo{ola-mundo.c}
+
+  Importante: o nome do arquivo não pode ter caracteres especiais do \LaTeX{}  como o caractere de sublinhado \inline*{\_}.
+\end{frame}
+
+\begin{frame}[t]\frametitle{\secname}\framesubtitle{\subsecname}
+  Esse comando pode receber ainda dois parâmetros opcionais:
+  \begin{itemize}
+    \item antes do nome do arquivo, as opções para o ambiente \inline*{lstlistings};
+    \item depois do nome do arquivo, as opções para o ambiente \inline*{tcolorbox};
+  \end{itemize}
+
+  Por exemplo, mostrar apenas algumas linhas e trocar o título da janela:
+\arquivo[firstline=3,firstnumber=3]{ola-mundo.c}[title={Trecho do mesmo arquivo}]
+\end{frame}
+
+\subsection{Slide todo}
+
+\begin{frame}[t]\frametitle{\secname}\framesubtitle{\subsecname}
+  Um slide normal pode ser pequeno para mostrar um trecho um pouco maior de um arquivo.
+  O comando \inline*{\textbackslash{}arquivo\{\}} consegue mostrar no máximo umas 15 linhas.
+
+  Por outro lado, é possível utilizar um slide inteiro para mostrar o arquivo (veja o próximo slide).
+  Basta utilizar o comando \inline*{\textbackslash{}framearquivo\{\}}.
+  Esse comando consegue mostrar 21 linhas de um arquivo.
+
+  O comando \inline*{\textbackslash{}framearquivo\{\}} tem basicamente o mesmo formato que o comando \inline*{\textbackslash{}arquivo\{\}}, incluindo os dois parâmetros opcionais.
+  Contudo, esse comando deve ser usado fora de qualquer slide porque ele cria um novo slide por si só.
+\end{frame}
+
+\framearquivo{fatorial.c}
+
+\subsection{Falso terminal}
+
+\begin{frame}[t]\frametitle{\secname}\framesubtitle{\subsecname}
+  Também é possível simular um terminal, caso seja preciso falar sobre algum comando:
+
+  ~
+  \def\prompt{\color{codekeyword}usuario@maquina:{\textasciitilde}\$\color{codefg}~}
+  \begin{terminal}[title={Bash}]
+  \prompt ls
+  Desktop\\Documents\\Downloads\\Music\\Pictures\\Public\\Videos\\
+  \prompt \rule{1ex}{1em}
+  \end{terminal}
+\end{frame}
+
+\subsection{Tema light vs. dark}
+
+\begin{frame}[t]\frametitle{\secname}\framesubtitle{\subsecname}
+  Dois esquemas de cores estão disponíveis para o realce de sintaxe do código, ambos baseados no esquema solarized\footnote[frame]{Disponível no \href{https://ethanschoonover.com/solarized/}{Github}}.
+  O esquema de cores pode ser trocado usando os comandos \inline*{\textbackslash{}codelight} (padrão) ou \inline*{\textbackslash{}codedark\{\}}:
+
+  ~
+  \begin{columns}[T]
+    \begin{column}{.33\textwidth}
+      \begin{tabularx}{\columnwidth}{c X}
+        \toprule
+        \multicolumn{2}{c}{\cianito{Ambos}} \\
+        \midrule
+        \color{codekeyword}   \rule[-0.5ex]{0.5cm}{0.5cm} & codekeyword   \\
+        \color{codevar}       \rule[-0.5ex]{0.5cm}{0.5cm} & codevar       \\
+        \color{codestring}    \rule[-0.5ex]{0.5cm}{0.5cm} & codestring    \\
+        \color{codedirective} \rule[-0.5ex]{0.5cm}{0.5cm} & codedirective \\
+        \color{codecomment}   \rule[-0.5ex]{0.5cm}{0.5cm} & codecomment   \\
+        \bottomrule
+      \end{tabularx}
+    \end{column}
+    \begin{column}{.33\textwidth}
+      \begin{tabularx}{\columnwidth}{c X}
+        \toprule
+        \multicolumn{2}{c}{\cianito{Light}} \\
+        \midrule
+        \color{codebg}    \rule[-0.5ex]{0.5cm}{0.5cm} & codebg    \\
+        \color{codefg}    \rule[-0.5ex]{0.5cm}{0.5cm} & codefg    \\
+        \color{codelines} \rule[-0.5ex]{0.5cm}{0.5cm} & codelines \\
+        \color{codetitle} \rule[-0.5ex]{0.5cm}{0.5cm} & codetitle \\
+        \color{codetext}  \rule[-0.5ex]{0.5cm}{0.5cm} & codetext  \\
+        \bottomrule
+      \end{tabularx}
+    \end{column}
+    \begin{column}{.33\textwidth}\codedark
+      \begin{tabularx}{\columnwidth}{c X}
+        \toprule
+        \multicolumn{2}{c}{\cianito{Dark}} \\
+        \midrule
+        \color{codebg}    \rule[-0.5ex]{0.5cm}{0.5cm} & codebg    \\
+        \color{codefg}    \rule[-0.5ex]{0.5cm}{0.5cm} & codefg    \\
+        \color{codelines} \rule[-0.5ex]{0.5cm}{0.5cm} & codelines \\
+        \color{codetitle} \rule[-0.5ex]{0.5cm}{0.5cm} & codetitle \\
+        \color{codetext}  \rule[-0.5ex]{0.5cm}{0.5cm} & codetext  \\
+        \bottomrule
+      \end{tabularx}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}[t]\frametitle{\secname}\framesubtitle{\subsecname}
+  \centering\cianito{Exemplo: Inline}
+
+  ~
+  \begin{columns}[T]
+    \begin{column}{.5\textwidth}
+      \codelight
+      O esquema claro é melhor para a apresentação em uma tela projetada.
+
+      Esse é um texto de exemplo com realce de sintaxe:
+      
+      \inline{int x = 10;}
+
+      Já esse outro exemplo não tem realce:
+      
+      \inline*{meuarquivo.txt}
+    \end{column}
+    \begin{column}{.5\textwidth}
+      \codedark
+      O esquema escuro é melhor para ler a apresentação diretamente no PC.
+
+      Esse é um texto de exemplo com realce de sintaxe:
+      
+      \inline{int x = 10;}
+
+      Já esse outro exemplo não tem realce:
+      
+      \inline*{meuarquivo.txt}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}[t,fragile]\frametitle{\secname}\framesubtitle{\subsecname}
+  \centering\cianito{Exemplo: Snippet}
+
+  ~
+  \begin{columns}[T]
+    \begin{column}{.5\textwidth}
+      \codelight
+\begin{snippet}
+int maior(int a, int b) {
+  return a > b ? a : b;
+}
+\end{snippet}
+    \end{column}
+    \begin{column}{.5\textwidth}
+      \codedark
+\begin{snippet}
+int maior(int a, int b) {
+  return a > b ? a : b;
+}
+\end{snippet}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}[t]\frametitle{\secname}\framesubtitle{\subsecname}
+  \centering\cianito{Exemplo: Arquivos}
+
+  ~
+  \begin{columns}[T]
+    \begin{column}{.5\textwidth}
+      \codelight
+      \arquivo[firstline=3,lastline=11,firstnumber=3]{fatorial.c}[]
+    \end{column}
+    \begin{column}{.5\textwidth}
+      \codedark
+      \arquivo[firstline=3,lastline=11,firstnumber=3]{fatorial.c}[]
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\framearquivo{fatorial.c}
+
+{\codedark\framearquivo{fatorial.c}}
+
+\section{Listas}
+
+\subsection{Definições}
+
+\begin{frame}\frametitle{\secname}\framesubtitle{\subsecname}\label{slide:frutas}
+  \subsubsection{Às vezes é preciso uma lista de definições:}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \begin{description}[abacaxi]
+        \item[Abacate] fruto do abacateiro.
+        \item[Abacaxi] espécie de ananás.
+        \item[Açaí] fruta do açaizeiro.
+        \item[Acerola] fruto semelhante à cereja.
+        \item[Amora] fruto da amoreira e de algumas espécies de silvas.
+        \item[Araçá] fruto de uma árvore myrtácea da América.
+      \end{description}
+    \end{column}\hfill{}\color{orange}\vline\hfill{}
+    \begin{column}{0.48\textwidth}
+      \begin{description}[Carambola]
+        \item[Araticum] designação de várias árvores do Brasil; fruto dessa árvore.
+        \item[Banana] fruto da bananeira.
+        \item[Cáqui] fruto amarelo e comestível.
+        \item[Carambola] fruto do caramboleiro.
+      \end{description}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\subsection{Listas}
+
+\begin{frame}[t]\frametitle{\secname}\framesubtitle{\subsecname}
+  As listas são configuradas para ficar mais próximo do restante do tema:
+
+  ~
+  \begin{columns}[T]
+    \begin{column}{.5\textwidth}
+      Lista não ordenada:
+      \begin{itemize}
+        \item Cachorro-quente;
+        \item Refrigerante;
+        \item Fritas.
+      \end{itemize}
+    \end{column}
+    \begin{column}{.5\textwidth}
+      Lista ordenada:
+      \begin{enumerate}
+        \item Jantar;
+        \item Escovar os dentes;
+        \item Dormir.
+      \end{enumerate}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\subsection{Lista longa}
+
+\begin{frame}[t]\frametitle{\secname}\framesubtitle{\subsecname}
+  Uma lista longa continua a sua numeração automaticamente:
+  \begin{columns}[T]
+    \begin{column}{.5\textwidth}
+      \begin{listalonga*}
+        \item O quê?
+        \item Quando?
+        \item Por que?
+      \end{listalonga*}
+    \end{column}
+    \begin{column}{.5\textwidth}
+      \begin{listalonga}
+        \item Quem?
+        \item Como?
+        \item Onde?
+      \end{listalonga}
+    \end{column}
+  \end{columns}
+  ~\\
+
+  Para iniciar uma nova lista longa, utilize o ambiente \inline*{listalonga*}:
+  \begin{columns}[T]
+    \begin{column}{.5\textwidth}
+      \begin{listalonga*}
+        \item Quedêle?
+        \item Quié?
+        \item Cumé?
+      \end{listalonga*}
+    \end{column}
+    \begin{column}{.5\textwidth}
+      ~
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\section{Outros}
+
+\subsection{Expressões matemáticas}
+
+\newcommand{\pulleqnum}[1][1cm]{\stepcounter{equation}\tag*{(\theequation)\hspace{#1}}}
+\begin{frame}[t]\frametitle{\secname}\framesubtitle{\subsecname}
+  É possível usar equações no meio de um slide, o volume $v$ de uma esfera é dado por:
+  \begin{align}\label{eq:volume}
+    v &= \int_0^r \int_0^{2\pi} \int_0^\pi \rho^2 \sin(\theta)\, d\theta\, d\varphi\, d\rho \\[1em]
+      &= \frac{4}{3}\pi r^3
+  \end{align}
+
+  Aqui, o determinante de uma matriz singular:
+  \begin{equation}
+    \det \begin{pmatrix}
+      1 & 2 & 3 \\
+      4 & 5 & 6 \\
+      7 & 8 & 9
+    \end{pmatrix} = 0\pulleqnum
+  \end{equation}
+\end{frame}
+
+\subsection{Citações e referências}
+
+\begin{frame}[t]\frametitle{\secname}\framesubtitle{\subsecname}%
+  \subsubsection{Da literatura}
+  Quando necessário pode-se colocar uma citação indicando a referência bibliográfica original de onde uma ideia foi retirada.
+  Por exemplo, há uma norma brasileira que rege as citações e referências bibliográficas \cite{NBR6023:2000}.
+
+  \subsubsection{De outro slide}
+  É possível fazer referência a outras partes dessa mesma apresentação de slides também.
+  A expressão do volume em \eqref{eq:volume} é ``facilmente'' derivada, mas as definições de frutas apresentadas anteriormente no Slide~\slideref{slide:frutas} foram\\ retiradas de um dicionário \cite{figueiredo1913novo}.
+\end{frame}
+
+\subsection{Agradecimento}
+
+\begin{frame}[t]\frametitle{\secname}\framesubtitle{\subsecname}
+  Também é fornecido um comando específico para produzir um slide final de agradecimento.
+  Esse comando é o \inline*{\textbackslash{}agradecimento\{\}} que recebe como parâmetro o agradecimento.
+  Ele gera um slide semelhante ao slide de título, mas com o agradecimento em baixo.
+
+  Por exemplo, o próximo slide foi produzido com o comando
+
+  \inline*{\textbackslash{}agradecimento\{Obrigado pela oportunidade!\}}
+  
+\end{frame}
+
+\agradecimento{Obrigado pela oportunidade!}
+
+\section*{Referências}
+\setbeamertemplate{bibliography item}{\rule{0pt}{1.5em}}
+\setbeamertemplate{footline}{%
+    \let\velhoframenumber\insertframenumber
+    \def\insertframenumber{R-\velhoframenumber}
+    \vspace{-1.5cm}\hfill\usebeamertemplate***{page number in head/foot}\hspace*{-5mm}
+    \vspace{3mm}
+}
+\begin{frame}[t]\frametitle{\secname}
+    \footnotesize
+    \bibliography{referencias.bib}
+\end{frame}
+
+\end{document}

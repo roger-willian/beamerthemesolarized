@@ -1,0 +1,96 @@
+% This whole file was adapted from the spanish-babel package. I just extracted
+% the pieces that replace the dot with a comma when the dot is followed by a
+% digit in math mode.
+%
+% Este arquivo inteiro foi adaptado do pacote spanish-babel. Eu só extrai as
+% partes que trocam um ponto por uma vírgula quando o ponto é seguido de um
+% dígito dentro de uma equação.
+
+\ProvidesLanguage{brazilian_comma.ldf}[2016/03/03 v5.0p Brazilian comma support from the babel system]%
+\makeatletter
+\let\br@shlist\@empty
+\def\extrasbrazilian{\shorthandsbrazilian}
+
+\def\br@set@shorthand#1{%
+  \expandafter\edef\csname br@savecat\string#1\endcsname
+    {\the\catcode`#1}%
+  \initiate@active@char{#1}%
+  \catcode`#1=\csname br@savecat\string#1\endcsname\relax
+  \if.#1\else
+    \addto\br@restorelist{\br@restore{#1}}%
+    \addto\br@select{\shorthandon{#1}}%
+    \addto\shorthandsbrazilian{\br@activate{#1}}%
+    \addto\br@shlist{#1}%
+  \fi}
+
+\def\br@use@shorthand{%
+  \if@safe@actives
+    \bbl@afterelse
+    \string
+  \else
+    \bbl@afterfi
+    {\ifx\thepage\relax
+       \bbl@afterelse
+       \string
+     \else
+       \bbl@afterfi
+       \br@use@sh
+     \fi}%
+  \fi}
+
+\def\br@use@sh#1{%
+  \ifx\protect\@unexpandable@protect
+    \bbl@afterelse
+    \noexpand#1%
+  \else%
+    \bbl@afterfi
+    \textormath
+      {\csname active@char\string#1\endcsname}%
+      {\csname normal@char\string#1\endcsname}%
+  \fi}
+
+\gdef\br@activate#1{%
+  \begingroup
+    \lccode`\~=`#1
+    \lowercase{%
+  \endgroup
+  \def~{\br@use@shorthand~}}}
+
+\def\br@declare#1{%
+  \@ifundefined{br@savecat\expandafter\string\@firstoftwo#1}%
+    {\@gobble}%
+    {\declare@shorthand{brazilian}{#1}}}
+
+\addto\shorthandsbrazilian{\languageshorthands{brazilian}}%
+
+\def\braziliandecimal#1{\def\br@decimal{{#1}}}
+\def\decimalcomma{\braziliandecimal{,}}
+\def\decimalpoint{\braziliandecimal{.}}
+\decimalcomma
+\AtBeginDocument{\bgroup\@fileswfalse}%
+\begingroup\lccode`\~=`\.\lowercase{\endgroup
+  \let\br@period@code~%
+  \br@set@shorthand{.}%
+  \let~\br@period@code}%
+\AtBeginDocument{\egroup}%
+\@namedef{normal@char\string.}{%
+  \@ifnextchar\egroup
+    {\br@period@code}%
+    {\csname active@char\string.\endcsname}}%
+\declare@shorthand{system}{.}{\br@period@code}%
+\addto\shorthandsbrazilian{%
+  \babel@savevariable{\mathcode`\.}%
+  \edef\br@period@math{\the\mathcode`\.}%
+  \babel@save\br@period@code
+  \ifnum\br@period@math="8000 %
+    \begingroup\lccode`\~=`\.\lowercase{\endgroup\let\br@period@code~}%
+  \else
+    \mathchardef\br@period@code\br@period@math\relax
+    \mathcode`\.="8000 %
+  \fi
+     \begingroup\lccode`\~=`\.\lowercase{\endgroup\babel@save~}%
+     \br@activate{.}}%
+\def\br@a#1{\br@declare{.#1}{\br@decimal#1}}%
+\br@a1\br@a2\br@a3\br@a4\br@a5\br@a6\br@a7\br@a8\br@a9\br@a0
+
+\makeatother

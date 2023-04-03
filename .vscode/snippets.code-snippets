@@ -1,0 +1,144 @@
+{
+	"colunas": {
+		"prefix": "cols",
+		"body": [
+			"\\begin{columns}[T]",
+			"  \\begin{column}{${1:.5}\\textwidth}",
+			"    ${3:esquerda}",
+			"  \\end{column}",
+			"  \\begin{column}{${2:.5}\\textwidth}",
+			"    ${4:direita}",
+			"  \\end{column}",
+			"\\end{columns}"
+		],
+		"description": "Duas colunas"
+	},
+	"nova pílula": {
+		"prefix": "pill",
+		"body": "\\newpill{${1:label}}{${2:cor}}",
+		"description": "Novo label pílula para usar depois"
+	},
+	"pílula": {
+		"prefix": "pill",
+		"body": "\\pill{${1:label}}",
+		"description": "Insere um label pílula"
+	},
+	"inline plano": {
+		"prefix": "inline",
+		"body": "\\inline*{${1:texto}}",
+		"description": "Inline sem realce"
+	},
+	"inline realçado": {
+		"prefix": "inline",
+		"body": "\\inline{${1:texto}}",
+		"description": "Inline com realce"
+	},
+	"snippet": {
+		"prefix": "snip",
+		"body": [
+			"\\begin{snippet}[${1:lst params}]",
+			"${2:texto}",
+			"\\end{snippet}"
+		],
+		"description": "Código com realce de sintaxe"
+	},
+	"janela": {
+		"prefix": "janela",
+		"body": [
+			"\\begin{janela}{${1:título}}[${2:colback=codebg}]",
+			"${3:conteúdo}",
+			"\\end{janela}"
+		],
+		"description": "Imitação de janela"
+	},
+	"arquivo": {
+		"prefix": "arquivo",
+		"body": "\\arquivo[${2:lst params}]{${1:caminho}}[${3:tcb params}]",
+		"description": "Editor com arquivo carregado"
+	},
+	"editor": {
+		"prefix": "editor",
+		"body": [
+			"\\begin{janela}{${1:título}}[${2:colback=codebg}]",
+			"  \\begin{snippet}[${3:style=text}]",
+			"${4:texto}",
+			"  \\end{snippet}",
+			"  \\vspace{1ex}",
+			"\\end{janela}"
+		],
+		"description": "Editor inline com realce de sintaxe"
+	},
+	"terminal": {
+		"prefix": "terminal",
+		"body": [
+			"\\begin{terminal}[${1:tcb params}]",
+			"${2:conteúdo}",
+			"\\end{terminal}"
+		],
+		"description": "Imitação de terminal"
+	},
+	"slide com arquivo": {
+		"prefix": "arqslide",
+		"body": "\\framearquivo[${2:lst params}]{${1:caminho}}[${3:tcb params}]",
+		"description": "Slide com código de um arquivo"
+	},
+	"figura larga": {
+    	"prefix": "fig",
+    	"body":[
+				"\\begin{columns}[T]",
+				"  \\begin{column}{\\textwidth}",
+				"    \\centering\\includegraphics[width=\\columnwidth]{${1:caminho}}\\medskip",
+				"",
+				"    \\it\\alert{${2:título}} --- ${3:descrição}",
+				"  \\end{column}",
+				"\\end{columns}"
+		],
+		"description": "Figura larga centralizada"
+	},
+	"figura estreita": {
+		"prefix": "fig",
+		"body": [
+			"\\begin{columns}[T]",
+			"  \\begin{column}{9.75cm}",
+			"    \\includegraphics[width=\\columnwidth]{${1:caminho}}",
+			"  \\end{column}",
+			"  \\begin{column}{4.25cm}",
+			"    \\it\\alert{${2:título}}\\\\\\",
+			"    ${3:descrição}",
+			"  \\end{column}",
+			"\\end{columns}"
+		],
+		"description": "Figura estreita e legenda à direita"
+	},
+	"slide com subtítulo": {
+		"prefix": "slide",
+		"body": [
+			"\\begin{frame}[${1:t}]\\frametitle{${2:\\secname}}\\framesubtitle{${3:\\subsecname}}",
+			"  $4",
+			"\\end{frame}"
+		],
+		"description": "Slide com subtítulo"
+	},
+	"slide": {
+		"prefix": "slide",
+		"body": [
+			"\\begin{frame}[${1:t}]\\frametitle{${2:\\secname}}",
+			"  $3",
+			"\\end{frame}"
+		],
+		"description": "Slide"
+	},
+	"figura": {
+		"prefix": "fig",
+		"body": "\\includegraphics[${2:opções}]{${1:caminho}}",
+		"description": "Insere figura"
+	},
+	"figura com copyright": {
+		"prefix": "fig",
+		"body": [
+			"\\includegraphics[width=\\columnwidth]{${1:caminho}}%",
+      "\\par\\vspace*{-1.85\\baselineskip}\\fcolorbox{black}{black}{\\footnotesize\\color{white}Photo by \\href{${2:endereço}}{${3:autor}}}"
+		],
+		"description": "Insere figura com copyright"
+	}
+}

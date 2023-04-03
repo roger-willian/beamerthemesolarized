@@ -1,0 +1,39 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerthemesolarized}
+  [2023 v1.0.0 estilo de apresentacao solarized]
+
+\mode<presentation>
+
+\usepackage[framemethod=tikz]{mdframed}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{backgrounds,fit}
+\usepackage{booktabs}
+\usepackage[alf]{abntex2cite}
+\usepackage[brazil]{babel}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
+\tcbuselibrary{listings}
+\usepackage{textcomp}
+\usepackage{collcell}
+
+\useinnertheme{solarized}
+\useoutertheme{solarized}
+\usecolortheme{solarized}
+\usefonttheme{solarized}
+\parskip\medskipamount
+\makeatletter
+\newcommand{\@minipagerestore}{\parskip\medskipamount\vspace*{-2\parskip}}
+\makeatother
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=cyan,
+  urlcolor=blue,
+  citecolor=magenta,
+  filecolor=red,
+  pdfstartview=Fit,
+  pdfpagelayout=SinglePage
+}
+
+\mode<all>

@@ -1,0 +1,35 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build images",
+            "type": "shell",
+            "command": "make",
+            "args": [
+                "--directory=images"
+            ],
+            "problemMatcher": [],
+            "group": "none"
+        },
+        {
+            "label": "build PDF",
+            "type": "shell",
+            "command": "latexmk",
+            "args": [
+                "-synctex=1",
+                "--shell-escape",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-pdf",
+                "slides.tex"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}

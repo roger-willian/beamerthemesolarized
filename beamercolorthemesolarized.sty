@@ -1,0 +1,250 @@
+\mode<presentation>
+
+% Solarized - cores copiadas de
+% https://github.com/subtheme-dev/solarized
+\definecolor{base03}{HTML}{002b36}
+\definecolor{base02}{HTML}{073642}
+\definecolor{base01}{HTML}{586e75}
+\definecolor{base00}{HTML}{657b83}
+\definecolor{base0}{HTML}{839496}
+\definecolor{base1}{HTML}{93a1a1}
+\definecolor{base2}{HTML}{eee8d5}
+\definecolor{base3}{HTML}{fdf6e3}
+\definecolor{yellow}{HTML}{b58900}
+\definecolor{orange}{HTML}{cb4b16}
+\definecolor{red}{HTML}{dc322f}
+\definecolor{magenta}{HTML}{d33682}
+\definecolor{violet}{HTML}{6c71c4}
+\definecolor{blue}{HTML}{268bd2}
+\definecolor{cyan}{HTML}{2aa198}
+\definecolor{green}{HTML}{859900}
+
+% Solarized Light
+\def\codelight{%
+    \colorlet{codekeyword}{green}
+    \colorlet{codevar}{blue}
+    \colorlet{codestring}{cyan}
+    \colorlet{codedirective}{orange}
+    \colorlet{codecomment}{base1}
+    \colorlet{codebg}{base3}
+    \colorlet{codefg}{base01}
+    \colorlet{codelines}{base1}
+    \colorlet{codetitle}{base00}
+    \colorlet{codetext}{base03}
+    \lstset{
+        commentstyle=\color{codecomment},
+        keywordstyle=\color{codekeyword},
+        directivestyle=\color{codedirective},
+        numberstyle=\scriptsize\color{codelines},
+        stringstyle=\color{codestring},
+        identifierstyle=\color{codevar},
+    }
+}
+
+% Solarized Dark
+\def\codedark{%
+    \colorlet{codekeyword}{green}
+    \colorlet{codevar}{blue}
+    \colorlet{codestring}{cyan}
+    \colorlet{codedirective}{orange}
+    \colorlet{codecomment}{base01}
+    \colorlet{codebg}{base03}
+    \colorlet{codefg}{base1}
+    \colorlet{codelines}{base01}
+    \colorlet{codetitle}{base0}
+    \colorlet{codetext}{base3}
+    \lstset{
+        commentstyle=\color{codecomment},
+        keywordstyle=\color{codekeyword},
+        directivestyle=\color{codedirective},
+        numberstyle=\scriptsize\color{codelines},
+        stringstyle=\color{codestring},
+        identifierstyle=\color{codevar},
+    }
+}
+
+\def\codenone{%
+    \colorlet{codekeyword}{black}
+    \colorlet{codevar}{black!75}
+    \colorlet{codestring}{black!75}
+    \colorlet{codedirective}{black}
+    \colorlet{codecomment}{black!50}
+    \colorlet{codebg}{white}
+    \colorlet{codefg}{black}
+    \colorlet{codelines}{black!50}
+    \colorlet{codetitle}{red}
+    \colorlet{codetext}{black}
+    \setbeamercolor{editor}{fg=codefg,bg=codebg}
+    \lstset{
+        commentstyle=\color{codecomment}\emph,
+        keywordstyle=\color{codekeyword}\bfseries,
+        directivestyle=\color{codedirective},
+        numberstyle=\scriptsize\color{codelines},
+        stringstyle=\color{codestring},
+        identifierstyle=\color{codevar},
+    }
+}
+
+\codelight
+
+
+\setbeamercolor{normal text}{fg=base02,bg=base2}
+\setbeamercolor{alerted text}{fg=red}
+\setbeamercolor{example text}{fg=green}
+
+\setbeamercolor{structure}{fg=base03}
+
+\setbeamercolor{background canvas}{parent=normal text}
+\setbeamercolor{background}{parent=background canvas}
+
+\setbeamercolor{palette primary}{fg=blue}
+\setbeamercolor{palette secondary}{fg=cyan}
+\setbeamercolor{palette tertiary}{fg=violet}
+\setbeamercolor{palette quaternary}{fg=orange}
+
+\setbeamercolor{math text}{}
+\setbeamercolor{math text inlined}{parent=math text}
+\setbeamercolor{math text displayed}{parent=math text}
+
+\setbeamercolor{normal text in math text}{}
+
+\setbeamercolor{local structure}{parent=structure}
+
+\setbeamercolor{titlelike}{parent=structure}
+
+\setbeamercolor{title}{parent=titlelike}
+\setbeamercolor{title in head/foot}{parent=title}
+
+\setbeamercolor{subtitle}{fg=base02}
+
+\setbeamercolor{author}{fg=base01}
+\setbeamercolor{institute}{parent=normal text}
+\setbeamercolor{date}{fg=base01}
+
+\setbeamercolor{section name}{}
+\setbeamercolor{section title}{fg=base2,bg=base02}
+
+\setbeamercolor{section in toc}{parent=normal text}
+\setbeamercolor{section in toc shaded}{parent=section in toc}
+\setbeamercolor{section in head/foot}{parent=palette tertiary}
+\setbeamercolor{section number projected}{parent=item projected}
+
+\setbeamercolor{subsection name}{}
+\setbeamercolor{subsection title}{parent=titlelike}
+
+\setbeamercolor{subsection in toc}{}
+\setbeamercolor{subsection in toc shaded}{parent=subsection in toc}
+\setbeamercolor{subsection in head/foot}{parent=palette secondary}
+\setbeamercolor{subsection in sidebar}{parent=palette sidebar primary}
+\setbeamercolor{subsection in sidebar shaded}{use=subsection in sidebar,fg=subsection in sidebar.fg!40!bg}
+\setbeamercolor{subsection number projected}{parent={subitem projected}}
+
+\setbeamercolor{subsubsection title}{parent=palette secondary}
+\setbeamercolor{subsubsection in toc}{parent=subsection in toc}
+\setbeamercolor{subsubsection in toc shaded}{parent=subsubsection in toc}
+\setbeamercolor{subsubsection in head/foot}{parent=subsection in head/foot}
+\setbeamercolor{subsubsection in sidebar}{parent=subsection in sidebar}
+\setbeamercolor{subsubsection in sidebar shaded}{parent=subsection in sidebar shaded}
+\setbeamercolor{subsubsection number projected}{parent=subsubitem projected}
+
+\setbeamercolor{headline}{}
+\setbeamercolor{footline}{}
+
+\setbeamercolor{sidebar}{}
+\setbeamercolor{sidebar left}{parent=sidebar}
+\setbeamercolor{sidebar right}{parent=sidebar}
+
+\setbeamercolor{logo}{parent=palette quaternary}
+
+\setbeamercolor{frametitle}{parent=titlelike}
+\setbeamercolor{framesubtitle}{parent=frametitle}
+
+\setbeamercolor{frametitle right}{parent=frametitle}
+
+\setbeamercolor{caption}{}
+\setbeamercolor{caption name}{parent=structure}
+
+\setbeamercolor{button}{use=local structure,bg=local structure.fg!50!bg,fg=white}
+\setbeamercolor{button border}{use=button,fg=button.bg}
+\setbeamercolor{navigation symbols}{use=structure,fg=structure.fg!40!bg}
+\setbeamercolor{navigation symbols dimmed}{use=structure,fg=structure.fg!20!bg}
+\setbeamercolor{mini frame}{parent=section in head/foot}
+
+\setbeamercolor{block body}{fg=blue,bg=base3}
+\setbeamercolor{block body alerted}{fg=red,bg=base3}
+\setbeamercolor{block body example}{fg=cyan,bg=base3}
+\setbeamercolor{block title}{fg=base2,bg=blue}
+\setbeamercolor{block title alerted}{fg=base2,bg=red}
+\setbeamercolor{block title example}{fg=base2,bg=cyan}
+
+\setbeamercolor{item}{parent=local structure}
+\setbeamercolor{subitem}{parent=item}
+\setbeamercolor{subsubitem}{parent=subitem}
+
+\setbeamercolor{item projected}{fg=base2,bg=base03}
+\setbeamercolor{subitem projected}{parent=item projected}
+\setbeamercolor{subsubitem projected}{parent=subitem projected}
+
+\setbeamercolor{enumerate item}{parent=item}
+\setbeamercolor{enumerate subitem}{parent=subitem}
+\setbeamercolor{enumerate subsubitem}{parent=subsubitem}
+
+\setbeamercolor{itemize item}{parent=item}
+\setbeamercolor{itemize subitem}{parent=subitem}
+\setbeamercolor{itemize subsubitem}{parent=subsubitem}
+
+\setbeamercolor{itemize/enumerate body}{}
+\setbeamercolor{itemize/enumerate subbody}{}
+\setbeamercolor{itemize/enumerate subsubbody}{}
+
+\setbeamercolor{description item}{parent=item, fg=orange}
+
+\setbeamercolor{description body}{}
+
+\setbeamercolor{bibliography item}{parent=item}
+
+\setbeamercolor{bibliography entry author}{use=structure,fg=structure.fg}
+\setbeamercolor{bibliography entry title}{use=normal text,fg=normal text.fg}
+\setbeamercolor{bibliography entry location}{use=structure,fg=structure.fg!65!bg}
+\setbeamercolor{bibliography entry note}{use=structure,fg=structure.fg!65!bg}
+
+\setbeamercolor{separation line}{parent=structure}
+
+\setbeamercolor{upper separation line head}{parent=separation line}
+\setbeamercolor{middle separation line head}{parent=separation line}
+\setbeamercolor{lower separation line head}{parent=separation line}
+
+\setbeamercolor{upper separation line foot}{parent=separation line}
+\setbeamercolor{middle separation line foot}{parent=separation line}
+\setbeamercolor{lower separation line foot}{parent=separation line}
+
+\setbeamercolor{abstract}{}
+\setbeamercolor{abstract title}{parent=structure}
+
+\setbeamercolor{verse}{}
+
+\setbeamercolor{quotation}{bg=base3}
+\setbeamercolor{quote}{parent=quotation}
+
+\setbeamercolor{page number in head/foot}{parent=structure}
+
+\setbeamercolor{qed symbol}{parent=structure}
+
+\setbeamercolor{note page}{bg=white!90!black, fg=black}
+\setbeamercolor{note title}{bg=white!80!black, fg=black}
+\setbeamercolor{note date}{parent=note title}
+
+\setbeamercolor{footnote}{parent=local structure}
+
+\newcommand{\ciano}[1]{{\color{cyan}#1}}
+\newcommand{\cianito}[1]{\ciano{\textbf{#1}}}
+\newcommand{\amarelo}[1]{{\color{yellow}#1}}
+\newcommand{\laranja}[1]{{\color{orange}#1}}
+\newcommand{\vermelho}[1]{{\color{red}#1}}
+\newcommand{\magenta}[1]{{\color{magenta}#1}}
+\newcommand{\violeta}[1]{{\color{violet}#1}}
+\newcommand{\azul}[1]{{\color{blue}#1}}
+\newcommand{\verde}[1]{{\color{green}#1}}
+
+\mode
+<all>

@@ -1,0 +1,776 @@
+\mode<presentation>
+
+% Slide de título
+\def\maketitle{%
+  \begingroup%
+    \setbeamertemplate{footline}{%
+      \vspace{-9cm}%
+      \includegraphics[width=\paperwidth]{bg-titulo}%
+      \setcounter{framenumber}{0}%
+    }%
+    \begin{frame}[t]%
+    \titlepage
+    \end{frame}
+  \endgroup
+}
+\defbeamertemplate*{title page}{solarized}[1][]
+{%
+  \vspace{3cm}
+  \begin{beamercolorbox}[wd=12cm,leftskip=1cm,sep=0pt]{title}
+    \usebeamerfont*{title}\MakeUppercase{\inserttitle}\par%
+    \ifx\insertsubtitle\empty
+      \relax
+    \else
+      \usebeamercolor*[fg]{subtitle}\color{fg}
+      \usebeamerfont*{subtitle}\insertsubtitle\par
+    \fi
+    \vspace{0.5cm}
+  \end{beamercolorbox}
+  \begin{beamercolorbox}[wd=12cm,leftskip=1cm]{author}
+    \ifx\insertauthor\empty
+      \relax
+    \else
+      \insertauthor\par
+    \fi
+  \end{beamercolorbox}
+  \begin{beamercolorbox}[wd=12cm,leftskip=1cm]{date}
+    \ifx\insertdate\empty
+      \relax
+    \else
+      \insertdate\par
+    \fi
+  \end{beamercolorbox}
+  \vfill
+  \ifx\insertthanks\empty
+    \relax
+  \else
+    \begin{beamercolorbox}[wd=12cm,leftskip=1cm,sep=0pt]{title}
+      \usebeamerfont*{subtitle}\insertthanks\par
+    \end{beamercolorbox}
+  \fi
+  \vfill
+}
+
+% slide de agradecimento
+\newcommand{\agradecimento}[1]{%
+  \def\insertthanks{#1}
+  \maketitle
+  \let\insertthanks\empty\relax
+}
+\let\insertthanks\empty\relax
+
+% bibliografia
+\newcommand{\makebib}[1]{%
+  \section*{\bibname}
+  \begingroup
+    \setbeamertemplate{frametitle}{%
+      \begin{beamercolorbox}[wd=14cm,ht=1.5cm]{frametitle}
+        \usebeamerfont{frametitle}\MakeUppercase{\bibname}\\[-10pt]
+        \usebeamercolor*[fg]{separation line}\color{fg}%
+        \makeatletter
+        \hspace{-\beamer@leftmargin}\rule{12cm}{1pt}
+        \makeatother
+      \end{beamercolorbox}
+    }
+    \setbeamertemplate{bibliography item}{\rule{0pt}{1.5em}}
+    \setbeamertemplate{footline}{}
+    \begin{frame}[t,allowframebreaks]{\bibname}
+      \small\vspace{-\parskip}\bibliography{#1}
+    \end{frame}
+  \endgroup
+}
+
+% Slide de seção
+\AtBeginSection[]{%
+  \begingroup
+    \setbeamertemplate{footline}{
+      \vspace{-9cm}
+      \includegraphics[width=\paperwidth]{bg-secao}
+    }
+    \begin{frame}[t]%
+      \sectionpage
+    \end{frame}
+    \addtocounter{framenumber}{-1}
+  \endgroup
+}
+\defbeamertemplate*{section page}{solarized}[1][]
+{%
+  \begingroup
+    \vspace{0.3cm}
+    \begin{beamercolorbox}[wd=\paperwidth,center]{head}
+      \usebeamerfont{title in head/foot}%
+      \usebeamercolor[fg]{title in head/foot}\color{fg}
+      \MakeUppercase{\inserttitle}\par
+      \ifx\insertsubtitle\empty
+        \relax
+      \else
+        \usebeamerfont*{subtitle in head/foot}
+        \usebeamercolor[fg]{subtitle in head/foot}
+        \insertsubtitle\par
+      \fi
+      \vspace{0.2cm}
+        \usebeamercolor[fg]{separation line}\color{fg}\rule[1ex]{14cm}{1pt}
+    \end{beamercolorbox}\vfill
+    \begin{minipage}[t]{45pt}
+        \vspace{0pt}
+        \begin{beamercolorbox}[wd=45pt,colsep=5pt,center]{section number projected}%
+            \fontsize{30pt}{0pt}\rule[-8pt]{0pt}{35pt}\selectfont\bfseries\thesection%
+        \end{beamercolorbox}%
+    \end{minipage}\hspace{5pt}%
+    \begin{minipage}[t]{12cm}
+        \vspace{0pt}
+        \begin{beamercolorbox}[wd=11.5cm,leftskip=5pt,colsep=5pt]{section title}%
+            \usebeamerfont{section title}\rule[-8pt]{0pt}{35pt}\secname{}\rule[-8pt]{0pt}{35pt}
+        \end{beamercolorbox}
+    \end{minipage}
+    \vspace{1.5cm}
+  \endgroup
+}
+
+
+% (sub-)section in toc: solarized
+
+\defbeamertemplate*{section in toc}{solarized}{%
+    \begin{minipage}[t]{3ex}
+        \begin{beamercolorbox}[center,wd=4ex,colsep=0.5ex]{section number projected}%
+            \rule[-0.7ex]{0pt}{3ex}\inserttocsectionnumber
+        \end{beamercolorbox}
+    \end{minipage}\hspace{1mm}%
+    \begin{minipage}[t]{\dimexpr\columnwidth-1mm-3ex}
+        \begin{beamercolorbox}[leftskip=1ex,colsep=0.5ex]{section in toc}%
+            \rule[-0.7ex]{0pt}{3ex}\linespread{0.7}\selectfont%
+            \begingroup\let \\ ~\relax%
+            \inserttocsection%
+            \endgroup%
+        \end{beamercolorbox}%
+    \end{minipage}\vspace{-1ex}%
+}
+
+\defbeamertemplate*{subsection in toc}{solarized}
+{\leavevmode\leftskip=1.5em\inserttocsubsection\par}
+
+\defbeamertemplate*{subsubsection in toc}{solarized}
+{\leavevmode\normalsize\usebeamerfont{subsection in toc}\leftskip=3em%
+  \usebeamerfont{subsubsection in toc}\inserttocsubsubsection\par}
+
+
+% (sub-)section in toc shaded, solarized
+
+\defbeamertemplate*{section in toc shaded}{solarized}[1][20]
+{\begin{colormixin}{#1!parent.bg}\usebeamertemplate{section in toc}\end{colormixin}\unskip}
+
+\defbeamertemplate*{subsection in toc shaded}{solarized}[1][20]
+{\begin{colormixin}{#1!parent.bg}\usebeamertemplate{subsection in toc}\end{colormixin}\unskip}
+
+\defbeamertemplate*{subsubsection in toc shaded}{solarized}[1][20]
+{\begin{colormixin}{#1!parent.bg}\usebeamertemplate{subsubsection in toc}\end{colormixin}\unskip}
+
+
+
+
+
+%
+% Item
+%
+
+% \defbeamertemplateparent{items}{itemize items,enumerate items}
+% {}
+
+
+% Itemize items
+
+% \defbeamertemplateparent{itemize items}{itemize item,itemize subitem,itemize subsubitem}
+% {}
+
+
+% Itemize items, solarized
+
+\defbeamertemplate*{itemize item}{solarized}{\usebeamerfont*{itemize item}\hbox{\donotcoloroutermaths$\blacksquare$}}
+\defbeamertemplate*{itemize subitem}{solarized}{\usebeamerfont*{itemize subitem}\hbox{\donotcoloroutermaths$\blacksquare$}}
+\defbeamertemplate*{itemize subsubitem}{solarized}{\usebeamerfont*{itemize subsubitem}\hbox{\donotcoloroutermaths$\blacksquare$}}
+
+
+% Enumerate items, solarized
+
+% \defbeamertemplateparent{enumerate items}{enumerate item,enumerate subitem,enumerate subsubitem,enumerate mini template}
+% {}
+
+\defbeamertemplate*{enumerate item}{solarized}{\insertenumlabel.}
+\defbeamertemplate*{enumerate subitem}{solarized}{\insertenumlabel.\insertsubenumlabel}
+\defbeamertemplate*{enumerate subsubitem}{solarized}{\insertenumlabel.\insertsubenumlabel.\insertsubsubenumlabel}
+\defbeamertemplate*{enumerate mini template}{solarized}{\insertenumlabel}
+
+
+% Description item, solarized
+
+\defbeamertemplate*{description item}{solarized}{\insertdescriptionitem}
+
+
+% Itemize/Enumerate body
+
+\defbeamertemplate*{itemize/enumerate body begin}{solarized}{}
+\defbeamertemplate*{itemize/enumerate body end}{solarized}{}
+
+\defbeamertemplate*{itemize/enumerate subbody begin}{solarized}{}
+\defbeamertemplate*{itemize/enumerate subbody end}{solarized}{}
+
+\defbeamertemplate*{itemize/enumerate subsubbody begin}{solarized}{}
+\defbeamertemplate*{itemize/enumerate subsubbody end}{solarized}{}
+
+% Description body
+
+\defbeamertemplate*{description body begin}{solarized}{}
+\defbeamertemplate*{description body end}{solarized}{}
+
+
+% Alerted text
+
+\defbeamertemplate*{alerted text begin}{solarized}{\setbeamercolor{local structure}{parent=alerted text}}
+
+
+
+% Structured text
+
+% empyt defaults
+
+
+% Bibliography items
+
+\defbeamertemplate*{bibliography item}{solarized}
+{\lower3.5pt\hbox{\hskip2pt\pgfuseimage{beamericonarticle}\hskip1pt}}
+
+\defbeamertemplate*{bibliography entry article}{solarized}{}
+\defbeamertemplate*{bibliography entry title}{solarized}{\par}
+\defbeamertemplate*{bibliography entry location}{solarized}{\par}
+\defbeamertemplate*{bibliography entry note}{solarized}{\par}
+
+
+% Buttons
+
+\newdimen\beamer@dima%
+\newdimen\beamer@dimb%
+
+\defbeamertemplate*{button}{solarized}
+{%
+  \setbox\beamer@tempbox=\hbox{{\insertbuttontext}}%
+  \ht\beamer@tempbox=6pt%
+  \dp\beamer@tempbox=0pt%
+  \setbox\beamer@tempbox=\vbox{\box\beamer@tempbox\vskip2pt}%
+  \beamer@tempdim=\wd\beamer@tempbox%
+  \beamer@dima=\beamer@tempdim\advance\beamer@dima by2.2pt
+  \beamer@dimb=\beamer@tempdim\advance\beamer@dimb by4pt
+  \begin{pgfpicture}{-4pt}{0pt}{\the\beamer@tempdim}{8pt}
+    \color{bg}
+    \pgfsetlinewidth{0.8pt}
+    \pgfpathqmoveto{0pt}{0pt}
+    \pgfpathqcurveto{-2.2pt}{0pt}{-4pt}{1.8pt}{-4pt}{4pt}
+    \pgfpathqcurveto{-4pt}{6.2pt}{-2.2pt}{8pt}{0pt}{8pt}
+    \pgfpathlineto{\pgfpoint{\the\beamer@tempdim}{8pt}}
+    \pgfpathcurveto%
+    {\pgfpoint{\the\beamer@dima}{8pt}}%
+    {\pgfpoint{\the\beamer@dimb}{6.2pt}}%
+    {\pgfpoint{\the\beamer@dimb}{4pt}}
+    \pgfpathcurveto%
+    {\pgfpoint{\the\beamer@dimb}{1.8pt}}%
+    {\pgfpoint{\the\beamer@dima}{0pt}}%
+    {\pgfpoint{\the\beamer@tempdim}{0pt}}
+    \pgfpathclose
+    \pgfusepathqfill
+    \colorlet{bg}{parent.bg}
+    \usebeamercolor[fg]{button border}
+    \pgfpathqmoveto{0pt}{0pt}
+    \pgfpathqcurveto{-2.2pt}{0pt}{-4pt}{1.8pt}{-4pt}{4pt}
+    \pgfpathqcurveto{-4pt}{6.2pt}{-2.2pt}{8pt}{0pt}{8pt}
+    \pgfpathlineto{\pgfpoint{\the\beamer@tempdim}{8pt}}
+    \pgfpathcurveto%
+    {\pgfpoint{\the\beamer@dima}{8pt}}%
+    {\pgfpoint{\the\beamer@dimb}{6.2pt}}%
+    {\pgfpoint{\the\beamer@dimb}{4pt}}
+    \pgfpathcurveto%
+    {\pgfpoint{\the\beamer@dimb}{1.8pt}}%
+    {\pgfpoint{\the\beamer@dima}{0pt}}%
+    {\pgfpoint{\the\beamer@tempdim}{0pt}}
+    \pgfpathclose
+    \pgfusepathqstroke
+  \end{pgfpicture}%
+  \hskip-\beamer@tempdim%
+  \box\beamer@tempbox%
+  \kern4pt%
+}
+
+
+% Abstract
+
+\defbeamertemplate*{abstract title}{solarized}
+{%
+  \begin{center}%
+    \abstractname
+  \end{center}%
+}
+
+\defbeamertemplate*{abstract begin}{solarized}
+{\beamercolorbox[vmode]{abstract}\leftskip2em\rightskip2em plus 1fill\usebeamerfont*{abstract}}
+
+\defbeamertemplate*{abstract end}{solarized}
+{\medskip\endbeamercolorbox}
+
+
+% Verse
+
+\defbeamertemplate*{verse begin}{solarized}
+{\beamercolorbox[vmode]{verse}}
+
+\defbeamertemplate*{verse end}{solarized}
+{\endbeamercolorbox}
+
+
+% Quotation
+
+\defbeamertemplate*{quotation begin}{solarized}
+{\vspace*{0.5cm}\beamercolorbox[vmode]{quotation}\raisebox{0pt}[0pt][0pt]{\raisebox{-0.5cm}{\Huge~\cianito{\textrm{``}}}}\par}
+
+\defbeamertemplate*{quotation end}{solarized}
+{\endbeamercolorbox\hspace*{\fill}\raisebox{0pt}[0pt][0pt]{\raisebox{0.25cm}{\Huge\cianito{\textrm{''}}}}\par\vspace*{-2\parskip}}
+
+
+
+% Quote
+
+\defbeamertemplate*{quote begin}{solarized}
+{\beamercolorbox[vmode]{quote}}
+
+\defbeamertemplate*{quote end}{solarized}
+{\endbeamercolorbox}
+
+
+% Footnotes
+
+\defbeamertemplate*{footnote}{solarized}
+{
+  \parindent 1em\noindent%
+  \raggedright
+  \hbox to 1.8em{\hfil\insertfootnotemark}\insertfootnotetext\par%
+}
+
+
+% Captions
+
+\defbeamertemplate*{caption}{solarized}
+{%
+  \raggedright
+  {%
+    \usebeamercolor[fg]{caption name}%
+    \usebeamerfont*{caption name}%
+    \insertcaptionname
+    \usebeamertemplate{caption label separator}%
+  }%
+  \insertcaption\par
+}
+\defbeamertemplate*{caption label separator}{solarized}{:\ }
+
+% Blocks
+
+% \defbeamertemplateparent{blocks}{block begin,block end,%
+%   block alerted begin,block alerted end,%
+%   block example begin,block example end}
+% {}
+
+\defbeamertemplate{block begin}{solarized}
+{
+  \par\vskip\medskipamount%
+  \begin{beamercolorbox}[colsep*=.75ex]{block title}
+    \usebeamerfont{block title}\insertblocktitle%
+  \end{beamercolorbox}%
+  {\parskip0pt\par}%
+  \ifbeamercolorempty[bg]{block title}
+  {}
+  {\ifbeamercolorempty[bg]{block body}{}{\nointerlineskip\vskip-0.5pt}}%
+  \usebeamerfont{block body}%
+  \begin{beamercolorbox}[colsep*=.75ex,vmode]{block body}%
+    \ifbeamercolorempty[bg]{block body}{\vskip-.25ex}{\vskip-.75ex}\vbox{}%
+}
+\defbeamertemplate{block end}{solarized}  
+{\end{beamercolorbox}\vskip\smallskipamount}
+
+\defbeamertemplate*{block alerted begin}{solarized}
+{
+  \par\vskip\medskipamount%
+  \begin{beamercolorbox}[colsep*=.75ex]{block title alerted}
+    \usebeamerfont*{block title alerted}\insertblocktitle%
+  \end{beamercolorbox}%
+  {\parskip0pt\par}%
+  \ifbeamercolorempty[bg]{block title alerted}
+  {}
+  {\ifbeamercolorempty[bg]{block body alerted}{}{\nointerlineskip\vskip-0.5pt}}%
+  \usebeamerfont{block body alerted}%
+  \begin{beamercolorbox}[colsep*=.75ex,vmode]{block body alerted}%
+    \ifbeamercolorempty[bg]{block body alerted}{\vskip-.25ex}{\vskip-.75ex}\vbox{}%
+}
+
+\defbeamertemplate*{block alerted end}{solarized}
+{\end{beamercolorbox}\vskip\smallskipamount}
+
+
+\defbeamertemplate*{block example begin}{solarized}
+{
+  \par\vskip\medskipamount%
+  \begin{beamercolorbox}[colsep*=.75ex]{block title example}
+    \usebeamerfont*{block title example}\insertblocktitle%
+  \end{beamercolorbox}%
+  {\parskip0pt\par}%
+  \ifbeamercolorempty[bg]{block title example}
+  {}
+  {\ifbeamercolorempty[bg]{block body example}{}{\nointerlineskip\vskip-0.5pt}}%
+  \usebeamerfont{block body example}%
+  \begin{beamercolorbox}[colsep*=.75ex,vmode]{block body example}%
+    \ifbeamercolorempty[bg]{block body example}{\vskip-.25ex}{\vskip-.75ex}\vbox{}%
+}
+\defbeamertemplate*{block example end}{solarized}
+{\end{beamercolorbox}\vskip\smallskipamount}
+
+
+
+
+% Theorems
+
+% \defbeamertemplateparent{theorems}{theorem begin,theorem end}
+% {}
+
+\defbeamertemplate*{theorem begin}{solarized}
+{%
+  \begin{\inserttheoremblockenv}
+  {%
+    \inserttheoremname
+    \ifx\inserttheoremaddition\@empty\else\ (\inserttheoremaddition)\fi%
+  }%
+}
+
+\defbeamertemplate*{theorem end}{solarized}
+{\end{\inserttheoremblockenv}}
+
+
+% Proofs
+\defbeamertemplate*{proof begin}{solarized}
+{\begin{block}{\insertproofname}}
+
+\defbeamertemplate*{proof end}{solarized}
+{\end{block}}
+
+\defbeamertemplate*{qed symbol}{solarized}
+{\openbox}
+
+% Accordion
+\makeatletter
+\def\begin@accordion[#1]{%
+    \begingroup
+    \def\accordion@plus{%
+        \tikz\draw[line width=0.3ex, x=1ex, y=1ex] (0.5,0) -- (0.5,1)(0,0.5) -- (1,0.5);
+        \hspace{1ex}
+    }
+    \def\accordion@minus{%
+        \raisebox{0.5ex}{\tikz\draw[line width=0.3ex, x=1ex, y=1ex] (0,0.5) -- (1,0.5);}
+        \hspace{1ex}
+    }
+    \setbeamercolor{block title}{fg=verdec}
+    \ifx#1>2
+        \only<1>{\setbeamercolor{block title}{fg=white}}
+    \else
+        \only<1,#1->{\setbeamercolor{block title}{fg=white}}
+    \fi
+    \newcommand\slice[2]{%
+        \begingroup
+        \let\insertaccordion\empty
+        \let\accordion@icon\accordion@plus
+        \only<+(1)>{%
+            \setbeamercolor{block title}{fg=white}
+            \def\insertaccordion{##2\vspace{1ex}}
+            \let\accordion@icon\accordion@minus
+        }%
+        \begin{block}{\accordion@icon \vphantom{fj}##1}%
+            \insertaccordion\vspace{-1ex}%
+        \end{block}\vspace{-1ex}
+        \endgroup
+    }
+}
+\newenvironment{accordion}{\@ifnextchar[{\begin@accordion}{\begin@accordion[0]}}{%
+    \vspace{1em}
+    \endgroup
+}
+\makeatother
+
+\setbeamertemplate{blocks}[default]
+
+\def\note#1{{\usebeamercolor[fg]{example text}\color{fg}#1}}
+\def\subsubsection#1{\vspace{\bigskipamount}{\usebeamercolor[fg]{subsubsection title}\color{fg}\textbf{#1}}\medskip\par}
+
+\lstdefinestyle{code}{
+    language=C,
+    upquote=true,
+    frame=none,
+    framerule=0pt,
+    framesep=0pt,
+    belowskip=0pt,
+    aboveskip=0pt,
+    backgroundcolor=\color{codebg},
+    commentstyle=\color{codecomment},
+    keywordstyle=\color{codekeyword},
+    numberstyle=\scriptsize\color{codelines},
+    stringstyle=\color{codestring},
+    identifierstyle=\color{codevar},
+    directivestyle=\color{codedirective},
+    basicstyle=\footnotesize\ttfamilywithbold\color{codefg},
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=1.25ex,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    literate=%
+      {à}{{\`a}}{1}%
+      {á}{{\'a}}{1}%
+      {â}{{\^a}}{1}%
+      {ã}{{\~a}}{1}%
+      {é}{{\'e}}{1}%
+      {ê}{{\^e}}{1}%
+      {í}{{\'i}}{1}%
+      {ó}{{\'o}}{1}%
+      {ô}{{\^o}}{1}%
+      {õ}{{\~o}}{1}%
+      {ú}{{\'u}}{1}%
+      {ç}{{\c{c}}}{1}%
+      {À}{{\`A}}{1}%
+      {Á}{{\'A}}{1}%
+      {Â}{{\^A}}{1}%
+      {Ã}{{\~A}}{1}%
+      {É}{{\'E}}{1}%
+      {Ê}{{\^E}}{1}%
+      {Í}{{\'I}}{1}%
+      {Ó}{{\'O}}{1}%
+      {Ô}{{\^O}}{1}%
+      {Õ}{{\~O}}{1}%
+      {Ú}{{\'U}}{1}%
+      {Ç}{{\c{C}}}{1}
+}
+
+\lstdefinestyle{text}{%
+    commentstyle={},
+    keywordstyle={},
+    stringstyle={},
+    identifierstyle={},
+    basicstyle=\color{codetext}
+}
+
+\lstset{style=code}
+
+
+
+\makeatletter
+
+% cria um novo label pílula para usar depois
+% \newpill{<label>}{<cor>}
+\newcommand{\newpill}[2]{%
+  \expandafter\def\csname pill@#1\endcsname{%
+    \tcbox[%
+      on line,
+      boxsep=0pt,
+      left=0.3ex,
+      right=0.3ex,
+      top=0.1ex,
+      bottom=0.1ex,
+      colback={#2},
+      colframe={#2},
+      coltext=white
+    ]{#1}%
+  }%
+}
+
+\newcommand{\pill}[1]{%
+  \let\temp@pill\expandafter\csname pill@#1\endcsname%
+  \temp@pill%
+}
+
+% código inline com possível realce
+% \inline{<código>}  % com realce
+% \inline*{<código>} % sem realce
+\newcommand{\inline}{\@ifstar{\inline@a}{\inline@b}}
+\newcommand{\inline@x}[1]{%
+  \tcbox[%
+    on line,
+    boxsep=0pt,
+    boxrule=.1ex,
+    colback=codebg,
+    colframe=codebg,
+    left=0.3ex,
+    right=0.3ex,
+    top=0.0ex,
+    bottom=0.0ex,
+  ]{#1}%
+}
+\newcommand{\codestrut}{\rule[-0.52ex]{0pt}{2ex}}
+\newcommand{\inline@a}[1]{\inline@x{\large\ttfamily\upshape\color{codetext}\codestrut{#1}}}
+\newcommand{\inline@b}[1]{\inline@x{\lstinline[basicstyle=\large\ttfamily\upshape\color{codefg}\codestrut]{#1}}}
+
+% snippet de código
+% \begin{snippet}[lstparams]
+% <código>
+% \end{snippet}
+\newtcblisting{snippet}[1][]{%
+  listing only,
+  colframe=codebg,
+  boxrule=0.5pt,
+  left=0pt,
+  bottom=0pt,
+  right=0pt,
+  top=2\medskipamount,
+  coltext=codefg,
+  colback=codebg,
+  fontupper=\ttfamily,
+  enlarge bottom by=-\medskipamount,
+  listing options={%
+    style=code,
+    inputpath=.,
+    numbers=none,
+    basicstyle=\large\ttfamilywithbold\color{codefg},
+    #1
+  }
+}
+
+% botões decorativos da janela
+\def\botoesjanela{%
+\begin{tikzpicture}
+  \draw[line width=0.5pt] (0,0) -- +(0.25,0) node{};
+  \draw[line width=0.5pt] (0.4,0) rectangle +(0.25,0.25) node{};
+  \draw[line width=0.5pt] (0.8,0) -- +(0.25,0.25) node{};
+  \draw[line width=0.5pt] (0.8,0.25) -- +(0.25,-0.25) node{};
+\end{tikzpicture}%
+}
+
+% uma imitação de janela
+% \begin{janela}{<título>}[<tcbparams>]
+%   <conteúdo>
+% \end{janela}
+\def\beginjanela@a#1[#2]{%
+  \tcbset{bicolor,
+    colframe=codetitle,
+    colbacktitle=codebg!90!codetitle,
+    after title={\hfill{}\botoesjanela{}},
+    before title={\hfill{}\raisebox{0.5ex}},
+    title=#1,
+    drop fuzzy shadow,
+    boxrule=0.5pt,
+    left=0ex,
+    bottom=0ex,
+    enlarge bottom by=-\medskipamount,
+    right=0ex,
+    toptitle=1ex,
+    titlerule=0.5pt,
+    coltitle=codetitle,
+    coltext=codefg,
+    fonttitle=\footnotesize,
+    fontupper=\footnotesize\ttfamily,
+    fontlower=\footnotesize\ttfamily
+  }
+  \ifdim\textwidth=\framewidth
+    \tcbset{grow sidewards by=3ex}
+  \fi
+  \begin{tcolorbox}[#2]
+}
+\newenvironment{janela}[1]{\@ifnextchar[{\beginjanela@a{#1}}{\beginjanela@a{#1}[]}}{%
+  \end{tcolorbox}
+}
+
+% insere uma tela com um arquivo
+% \arquivo[lstparams]{caminho}[tcbparams]
+\def\arquivo{\@ifnextchar[{\arquivo@a}{\arquivo@a[]}}
+\def\arquivo@a[#1]#2{\@ifnextchar[{\arquivo@b[#1]{#2}}{\arquivo@b[#1]{#2}[]}}
+\def\arquivo@b[#1]#2[#3]{%
+  \tcbset{
+  sidebyside=true,
+  sidebyside gap=1ex,
+  lefthand width=2ex,
+  top=3\medskipamount,
+  colback=codebg!90!codefg,
+  colbacklower=codebg}%
+  \begin{janela}{Arquivo: {#2}}[#3]%
+    \tcblower
+    \lstinputlisting[#1]{#2}
+  \end{janela}
+}
+
+% insere um terminal
+% \begin{terminal}[tcbparams]
+%   <conteúdo>
+% \end{terminal}
+\def\beginterminal@a[#1]{%
+  \tcbset{top=\medskipamount,colback=codebg}
+  \begin{janela}{Terminal}[#1]%
+}
+\newenvironment{terminal}{\@ifnextchar[{\beginterminal@a}{\beginterminal@a[]}}{%
+  \end{janela}
+}
+
+% insere um slide com código
+% \framearquivo[<lstparams>]{<caminho>}[<tcbparams>]
+\def\framearquivo{\@ifnextchar[{\framearquivo@a}{\framearquivo@a[]}}
+\def\framearquivo@a[#1]#2{\@ifnextchar[{\framearquivo@b[#1]{#2}}{\framearquivo@b[#1]{#2}[]}}
+\def\framearquivo@b[#1]#2[#3]{%
+  \begingroup
+  \setbeamercolor{background canvas}{bg=codebg}
+  \begin{frame}[t,plain]
+    \begin{columns}[T]
+      \begin{column}[t]{\paperwidth}
+        \arquivo[#1]{#2}[%
+        no shadow,
+        colframe=codefg,
+        sharp corners,
+        height=\dimexpr\paperheight-1pt,
+        boxrule=0pt,
+        titlerule=0.5pt,#3]
+      \end{column}
+    \end{columns}
+  \end{frame}
+  \endgroup
+}
+
+\makeatother
+
+% link para um outro slide
+% \slideref{<label>}
+\newcommand{\slideref}[1]{%
+  \tcbox[%
+    on line,
+    boxsep=0pt,
+    colback=base2,
+    colframe=base03,
+    left=0.3ex,
+    right=0.3ex,
+    top=0.3ex,
+    bottom=0.1ex,
+    boxrule=1pt
+  ]{\bfseries\firalining\ref{#1}}%
+}
+
+% Ambiente listalonga
+\newcounter{solarizedlonga}
+\newenvironment{listalonga}{%
+  \begin{enumerate}\setcounter{enumi}{\thesolarizedlonga}
+}{%
+  \end{enumerate}\setcounter{solarizedlonga}{\theenumi}
+}
+
+\newenvironment{listalonga*}{%
+  \begin{enumerate}
+}{%
+  \end{enumerate}\setcounter{solarizedlonga}{\theenumi}
+}
+
+% Colunas especiais para código e texto com fonte monoespaçada
+\newcolumntype{I}{>{\collectcell{\inline}}l<{\endcollectcell}}
+\newcolumntype{i}{>{\collectcell{\inline*}}l<{\endcollectcell}}
+
+\mode
+<all>

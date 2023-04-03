@@ -1,0 +1,44 @@
+\setbeamertemplate{frametitle continuation}{}
+\setbeamertemplate{frametitle}{
+    \begin{beamercolorbox}[wd=14cm,ht=1.5cm]{frametitle}
+        \begingroup\let \\ ~\relax%
+        \MakeUppercase{\insertframetitle}%
+        \endgroup%
+        \ifx\insertframesubtitle\empty%
+            \relax
+        \else
+            \\\insertframesubtitle
+        \fi
+        \\[-10pt]
+        \makeatletter
+        \usebeamercolor*[fg]{separation line}\color{fg}%
+        \hspace{-\beamer@leftmargin}\rule{12cm}{1pt}
+        \makeatother
+    \end{beamercolorbox}
+}
+
+\setbeamertemplate{page number in head/foot}{%
+    \begin{beamercolorbox}[wd=1.05cm,ht=0.75cm,colsep=0pt,center]{page number in head/foot}%
+        \rule[-0.1ex]{0pt}{1.5ex}%
+        \firalining\insertframenumber%
+    \end{beamercolorbox}\hspace{5mm}%
+}
+
+% HACK: O beamer calcula automaticamente a altura da footline, o que poderia
+% gerar warnings quando compila o LaTeX porque a imagem do footline tem aquele lado
+% direito mais alto e muitas vezes não é interessante cortar o texto por ali.
+\let\oldmaketitle\maketitle
+\def\novofootline{%
+    \setbeamertemplate{footline}{%
+        \vspace*{-9cm}\includegraphics[width=\paperwidth]{bg-others.pdf}
+
+        \vspace{-1.5cm}\hfill\usebeamertemplate***{page number in head/foot}
+        \vspace{.75cm}
+    }
+}
+\def\maketitle{\let\maketitle\oldmaketitle\novofootline\maketitle}
+\setbeamertemplate{footline}{%
+    \rule{\paperwidth}{4mm}%
+}
+
+\setbeamertemplate{navigation symbols}{}

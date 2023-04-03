@@ -1,0 +1,6 @@
+slides.*
+!slides.tex
+
+images/latex/*
+!images/latex/template.tex
+!images/latex/brazilian_comma.ldf
