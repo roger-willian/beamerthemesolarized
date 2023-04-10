@@ -8,10 +8,9 @@
 #
 #  Additionally, tested with
 #       GNU bash version 5.0.17(1)-release in a Kubuntu 20.04
-#       xmllint using libxml version 20910
 #
-#  This file version: 2020-12-06
-#  Author: Roger W. P. da Silva (williandmn@gmail.com)
+#  This file version: 2023-04-06
+#  Author: Roger W. P. da Silva (github.com/roger-willian)
 ################################################################################
 
 ################################################################################
@@ -50,12 +49,12 @@ DRWFLAGS := -x -a -f pdf -o
 
 ## Directories and incude files
 # Directories
-SVGDIR  := svg
-DRWDIR  := drawio
-PDFDIR  := pdf
-PLOTDIR := plots
-DATADIR := $(PLOTDIR)/data
-TEXDIR  := latex
+SVGDIR  := images/svg
+DRWDIR  := images/drawio
+PDFDIR  := images/pdf
+PLTDIR  := images/plots
+TEXDIR  := images/latex
+DATADIR := $(PLTDIR)/data
 # include files
 PLOTH   := header.gp
 TEMPLATE:= template.tex
@@ -90,18 +89,20 @@ SPACE +=
 ## real targets type A (svg diagrams)
 # uncomment this if there are *.svg files to be converted to *.pdf
 SVGPDF := $(patsubst $(SVGDIR)/%.svg,$(PDFDIR)/%.pdf,$(wildcard $(SVGDIR)/*.svg))
+SVGTEX := $(patsubst $(SVGDIR)/%.svg,$(TEXDIR)/%.tex,$(wildcard $(SVGDIR)/*.svg))
 
 ## real targets type B (drawio diagrams)
 # uncomment this if there are *.drawio files to be converted to *.pdf
 DRWPDF := $(patsubst $(DRWDIR)/%.drawio,$(PDFDIR)/%.pdf,$(wildcard $(DRWDIR)/*.drawio))
 
-## real targets option C (single plots)
+## real targets type C (single plots)
 # uncomment this if each *.plt file must generate only one *.pdf file
-PLOTS    := $(patsubst $(PLOTDIR)/%.plt,$(PDFDIR)/%.pdf,$(wildcard $(PLOTDIR)/*.plt))
+PLTPDF    := $(patsubst $(PLTDIR)/%.plt,$(PDFDIR)/%.pdf,$(wildcard $(PLTDIR)/*.plt))
+PLTTEX    := $(patsubst $(PLTDIR)/%.plt,$(TEXDIR)/%.tex,$(wildcard $(PLTDIR)/*.plt))
 
 ## intermediate targets
 # uncomment this to avoid deleting these LaTeX intermediate files
-.PRECIOUS: $(patsubst $(PDFDIR)/%.pdf,$(TEXDIR)/%.tex,$(PLOTS) $(SVGPDF) $(PLOTS))
+.PRECIOUS: $(patsubst $(PDFDIR)/%.pdf,$(TEXDIR)/%.tex,$(PLTPDF) $(SVGPDF) $(PLTPDF))
 
 ################################################################################
 #                                R U L E S                                     #
@@ -109,9 +110,12 @@ PLOTS    := $(patsubst $(PLOTDIR)/%.plt,$(PDFDIR)/%.pdf,$(wildcard $(PLOTDIR)/*.
 ## Main rule: generates all the PDF images.
 #  Prerequisites:
 #    - $(SVGPDF) = the PDF files with the diagrams initially from SVGs
-all: $(SVGPDF) $(DRWPDF) $(PLOTS)
+all: $(SVGPDF) $(DRWPDF) $(PLTPDF)
 
-## SVG to LaTeX: converts an SVG image into LaTeX and PDF using a LaTeX template.
+## SVG to LaTeX: converts all SVG images to LaTeX and PDF using a LaTeX template
+svgtex: $(SVGTEX)
+
+## SVG to LaTeX: converts an SVG image into LaTeX and PDF using a LaTeX template
 #  Prerequisites:
 #    - $(SVGDIR)/%.svg = an SVG file with line art and text
 #    - $(TEMPLATE)     = a LaTeX file with the template model
@@ -122,8 +126,27 @@ all: $(SVGPDF) $(DRWPDF) $(PLOTS)
 $(TEXDIR)/%.tex $(TEXDIR)/%-svg.pdf_tex $(TEXDIR)/%-svg.pdf: $(SVGDIR)/%.svg $(TEXDIR)/$(TEMPLATE)
 	$(INK) $(INKFLAGS) $(TEXDIR)/$(*F)-svg.pdf $< && \
 	sed -e "s|<filename>|$(*F)-svg.pdf_tex|" $(TEXDIR)/$(TEMPLATE) > $(TEXDIR)/$(*F).tex
-	(xmllint --xpath '//*[name()="dc:creator"]//*[name()="dc:title"]/text()' $< | xargs -I "{}" sed -i "s|<author>|{}|" $(TEXDIR)/$(*F).tex)
 	@echo ""
+
+## Gnuplot to LaTeX: converts a gnuplot script and a data file into LaTeX using
+#    a common configuration.
+plttex: $(PLTTEX)
+
+## Gnuplot to LaTeX: converts all gnuplot scripts and a data files into LaTeX
+#    using a common configuration.
+#  Prerequisites:
+#    - $(PLTDIR)/%.plt  = a GNUPLOT script with instructions to generate the plot
+#    - $(PLOTH)         = a GNUPLOT include file with some common configuration
+#  Targets:
+#    - $(TEXDIR)/%.tex     = a LaTeX file with the text of the plot
+#    - $(TEXDIR)/%-inc.pdf = a PDF file with the line art of the plot
+$(TEXDIR)/%.tex $(TEXDIR)/%-inc.pdf: $(PLTDIR)/%.plt $(PLTDIR)/$(PLOTH)
+	cd $(PLTDIR) && \
+	$(GP) $(GPFLAGS) $(*F).plt
+	@echo ""
+
+## LaTeX to PDF: converts all LaTeX and PDF files to self-contained PDF files.
+texpdf: $(SVGPDF) $(PLTPDF)
 
 ## LaTeX to PDF: converts LaTeX and PDF files into self-contained PDF files.
 #  Prerequisites:
@@ -133,10 +156,13 @@ $(TEXDIR)/%.tex $(TEXDIR)/%-svg.pdf_tex $(TEXDIR)/%-svg.pdf: $(SVGDIR)/%.svg $(T
 $(PDFDIR)/%.pdf: $(TEXDIR)/%.tex
 	pushd $(TEXDIR) > /dev/null && \
 	{ $(TEX) $(TEXFLAGS) $(<F) > /dev/null 2>&1 || { grep -e '^!' -A 3 $(*F).log && false; }; } && \
-	rm $(*F).aux $(*F).log && \
+	rm -f $(*F).aux $(*F).log && \
 	popd > /dev/null && \
 	mv $(TEXDIR)/$(@F) $@
 	@echo ""
+
+## draw.io to PDF: converts all draw.io diagrams to PDF files
+drwpdf: $(DRWPDF)
 
 ## draw.io to PDF: converts a draw.io diagram to a PDF file
 #  Prerequisites:
@@ -144,25 +170,12 @@ $(PDFDIR)/%.pdf: $(TEXDIR)/%.tex
 #  Targets:
 #    - $(PDFDIR)/%.pdf    = a final PDF file including the text and the line art
 $(PDFDIR)/%.pdf: $(DRWDIR)/%.drawio
-	$(DRW) $(DRWFLAGS) $@ $<
-	@echo ""
-
-## Gnuplot to LaTeX: converts a gnuplot script and a data file into LaTeX using
-#    a common configuration.
-#  Prerequisites:
-#    - $(PLOTDIR)/%.plt = a GNUPLOT script with instructions to generate the plot
-#    - $(PLOTH)         = a GNUPLOT include file with some common configuration
-#  Targets:
-#    - $(TEXDIR)/%.tex     = a LaTeX file with the text of the plot
-#    - $(TEXDIR)/%-inc.pdf = a PDF file with the line art of the plot
-$(TEXDIR)/%.tex $(TEXDIR)/%-inc.pdf: $(PLOTDIR)/%.plt $(PLOTDIR)/$(PLOTH)
-	cd $(PLOTDIR) && \
-	$(GP) $(GPFLAGS) $(*F).plt
+	$(DRW) $(DRWFLAGS) $@ $< --no-sandbox
 	@echo ""
 
 ## Soft cleaning: deletes the final PDF files generated.
 clean:
-	rm -f $(SVGPDF) $(DRWPDF)
+	rm -f $(SVGPDF) $(PLTPDF) $(DRWPDF)
 
 ## LaTeX cleaning: deletes all files in the latex directory except the template.
 clean-latex:

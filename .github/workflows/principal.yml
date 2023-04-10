@@ -1,0 +1,68 @@
+# Workflow principal
+name: principal
+
+# Hooks
+on:
+  # Inicia com um push no ramo principal
+  push:
+    branches: [ "master" ]
+
+  # Pode rodar com um clique
+  workflow_dispatch:
+
+# O único job desse workflow
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    # Clona o modelo, gera e sobe o PDF
+    steps:
+      # Clone para o $GITHUB_WORKSPACE
+      - uses: actions/checkout@v3
+
+      # Gera as figuras em LaTeX
+      - name: latex-figs
+        uses: docker://rogerwillian/latex-figs
+        with:
+          entrypoint: make
+          args: svgtex plttex
+
+      # Converte os diagramas do drawio em PDF
+      - name: drawio-figs
+        uses: docker://rogerwillian/drawio
+        with:
+          entrypoint: make
+          args: drwpdf
+      
+      # Converte as figura em LaTeX para PDF
+      - name: pdf-figs
+        uses: docker://texlive/texlive
+        with:
+          entrypoint: make
+          args: texpdf
+
+      # Gera o PDF final
+      - name: pdf-final
+        uses: docker://texlive/texlive
+        with:
+          entrypoint: latexmk
+          args: -pdf slides.tex -output-directory=/github/workspace
+
+      # Sobe o os arquivos para release
+      - uses: actions/upload-artifact@v3
+        with:
+          name: release.zip
+          path: |
+            code/
+            images/pdf/
+            images/bitmap/
+            beamercolorthemesolarized.sty
+            beamerfontthemesolarized.sty
+            beamerinnerthemesolarized.sty
+            beamerouterthemesolarized.sty
+            beamerthemesolarized.sty
+            bg-others.pdf
+            bg-secao.pdf
+            bg-titulo.pdf
+            referencias.bib
+            slides.tex
