@@ -2,5 +2,5 @@ slides.*
 !slides.tex
 
 images/latex/*
-!images/latex/template.tex
+!images/latex/modelo-svg.tex
 !images/latex/brazilian_comma.ldf

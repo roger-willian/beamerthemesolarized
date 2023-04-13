@@ -1,4 +1,6 @@
-load 'header.gp'
+load 'config.gp'
+autor = 'Roger Willian (github.com/roger-willian)'
+@terminal
 
 set key w 3.5 h 1 left top
 

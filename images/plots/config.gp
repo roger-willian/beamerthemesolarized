@@ -68,7 +68,7 @@ set grid back ls 20
 set border back ls 21
 set xtics nomirror
 set ytics nomirror
-set decimalsign '.'
+set decimalsign ','
 
 
 # Configurações do terminal
@@ -76,7 +76,7 @@ proporcao     = 6.0/4.0            # L/A
 larguramm     = 97.5               # L em mm
 largura       = larguramm/25.4     # L em pol
 altura        = largura/proporcao  # A em pol
-autor         = 'Fulano de Tal (fulano.de.tal@exemplo.com)'
+autor         = 'Desconhecido'
 cabecalho     = '\usepackage[T1]{fontenc}'."\n".\
                 '\usepackage[default]{Fira Sans}'."\n".\
                 '\usepackage{newtxsf}'."\n".\
