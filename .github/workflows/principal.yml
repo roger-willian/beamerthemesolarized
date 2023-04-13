@@ -5,7 +5,8 @@ name: principal
 on:
   # Inicia com um push no ramo principal
   push:
-    branches: [ "master" ]
+    branches:
+    - main
 
   # Pode rodar com um clique
   workflow_dispatch:
